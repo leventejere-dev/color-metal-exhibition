@@ -317,7 +317,7 @@ function About() {
                 <ul>
                   <li>All geometry modelled procedurally from the supplied photographs; dimensions are estimates.</li>
                   <li>Stadium: shown as a half-section cut along the pitch centre line; stand depths, roof heights and seat colour are estimates.</li>
-                  <li>Church: north elevation, buttress count, tracery and helm profile simplified; helm kept in its existing grey metal.</li>
+                  <li>Church: north elevation, buttress count, tracery and helm profile simplified; tower helm shown in PREFA anthracite.</li>
                   <li>Răscruci: side elevations, ornament and column count simplified.</li>
                 </ul>
               </div>

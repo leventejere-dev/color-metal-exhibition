@@ -5,7 +5,7 @@ Interactive real-time 3D concept of a manually rotated exhibition table carrying
 | # | Project | Location | Metal | Application |
 |---|---------|----------|-------|-------------|
 | 01 | Sepsi OSK Stadium (half-section) | Sfântu Gheorghe | Titanium-zinc (gold-tone, as photographed) | Cladding / roofing |
-| 02 | Tășnad Church | Tășnad | Anthracite aluminium | Standing-seam roofing |
+| 02 | Tășnad Church | Tășnad | Anthracite aluminium (tower helm: PREFA anthracite) | Standing-seam roofing |
 | 03 | Răscruci Historic Building | Răscruci | Copper | Copper roofing |
 
 > Conceptual visualisation — **not** manufacturing documentation. All dimensions are adjustable visualisation parameters.
@@ -33,7 +33,7 @@ All tunable values live in [`src/scene/layout.ts`](src/scene/layout.ts).
 All three buildings are modelled procedurally from the supplied reference photographs. They are recognisable miniatures, not dimensionally verified replicas.
 
 - **Sepsi OSK Stadium** — overall dimensions, stand depths, roof heights and seat colour are estimates; only the half with the main stand and the zinc-clad pavilion (corner spire, "wave" arch, three stepped gables, spire with pinnacles, truncated tower) is modelled. Pier count and spacing approximate. The zinc is shown in the gold tone visible in the photographs.
-- **Tășnad Church** — lengths, heights and roof pitch estimated; north elevation, buttress count and window tracery simplified; baroque helm profile approximated and kept in its existing light-grey metal (the photos don't show it re-clad); buttress caps shown in grey metal.
+- **Tășnad Church** — lengths, heights and roof pitch estimated; north elevation, buttress count and window tracery simplified; baroque helm profile approximated; the tower helm is clad in PREFA anthracite aluminium like the roof; buttress caps shown in grey metal.
 - **Răscruci Historic Building** — proportions taken from elevation and plan photographs; side elevations, ornament, column count and roof pitches simplified.
 
 ## Tech stack

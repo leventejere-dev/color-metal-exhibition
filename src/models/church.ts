@@ -12,10 +12,10 @@
  *    buttresses with sloped, metal-capped weatherings; tall pointed windows.
  *  - Gothic-revival south porch with pointed portal and small pinnacles.
  *  - NEW ROOF (COLOR METAL scope): anthracite aluminium standing seam on nave,
- *    choir, apse and porch; seams ~0.55 m apart.
+ *    choir, apse and porch; seams ~0.55 m apart. The baroque tower helm is
+ *    also clad in PREFA anthracite aluminium (per client).
  * Approximations: exact lengths/heights, buttress count, north elevation,
- * window tracery (simplified), helm profile; the helm is kept in its existing
- * light-grey metal because the photos do not show it re-clad.
+ * window tracery (simplified), helm profile.
  */
 import * as THREE from 'three'
 import { MODEL_LENGTH } from './common'
@@ -319,14 +319,14 @@ export function buildChurch(): Builder {
     [1.7, topY + 4.4],
     [1.52, topY + 5.0],
   ]
-  b.add('helm', squareLoft(bell, tx, 0))
+  b.add('alu', squareLoft(bell, tx, 0))
   // oculus dormers on the bell (one per face)
   for (const f of faces) {
     const hwAt = 3.05
     const p = f.d(hwAt)
     const m = mat(p.x, 0, p.z, f.ry)
-    b.add('helm', metricBox(1.5, 1.7, 1.5), new THREE.Matrix4().multiplyMatrices(m, mat(0, topY + 1.85, 0.2)))
-    b.add('helm', new THREE.CylinderGeometry(0.85, 0.85, 1.6, 16, 1, false, -Math.PI / 2, Math.PI), new THREE.Matrix4().multiplyMatrices(m, mat(0, topY + 2.7, 0.2, 0, -Math.PI / 2)))
+    b.add('alu', metricBox(1.5, 1.7, 1.5), new THREE.Matrix4().multiplyMatrices(m, mat(0, topY + 1.85, 0.2)))
+    b.add('alu', new THREE.CylinderGeometry(0.85, 0.85, 1.6, 16, 1, false, -Math.PI / 2, Math.PI), new THREE.Matrix4().multiplyMatrices(m, mat(0, topY + 2.7, 0.2, 0, -Math.PI / 2)))
     b.add('towerW', new THREE.TorusGeometry(0.45, 0.11, 6, 20), new THREE.Matrix4().multiplyMatrices(m, mat(0, topY + 1.9, 0.98)))
     b.add('clock', new THREE.CircleGeometry(0.42, 20), new THREE.Matrix4().multiplyMatrices(m, mat(0, topY + 1.9, 0.96)))
   }
@@ -348,7 +348,7 @@ export function buildChurch(): Builder {
     [0.07, sy + 8.9],
     [0.02, sy + 9.4],
   ]
-  b.add('helm', squareLoft(spire, tx, 0))
+  b.add('alu', squareLoft(spire, tx, 0))
   // gilded globe, rod, star
   const gy = sy + 9.4
   b.add('gilt', new THREE.SphereGeometry(0.45, 16, 12), mat(tx, gy + 0.3, 0))

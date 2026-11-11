@@ -40,7 +40,7 @@ export const MODELS: ModelInfo[] = [
     materialRo: 'Aluminiu antracit',
     application: 'Standing-seam roofing.',
     swatch: 'linear-gradient(135deg,#4a4f55,#2c3034 55%,#43484d)',
-    note: 'Standing seams modelled at ~0.55 m spacing (real scale).',
+    note: 'Roof and tower helm in anthracite aluminium (tower: PREFA anthracite). Standing seams at ~0.55 m spacing (real scale).',
   },
   {
     id: 'manor',
