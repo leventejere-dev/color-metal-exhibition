@@ -90,7 +90,7 @@ function InfoCard() {
         <dd>{m.application}</dd>
         <dt>Model</dt>
         <dd>
-          ≈ 80 cm longest side · indicative scale ≈ 1:{Math.round(SCALES[m.id] / 5) * 5}
+          ≈ 1 m longest side · indicative scale ≈ 1:{Math.round(SCALES[m.id] / 5) * 5}
         </dd>
       </dl>
       {m.id === 'stadium' && (
@@ -303,10 +303,10 @@ function About() {
               <div>
                 <div className="kicker">Visualisation parameters</div>
                 <ul>
-                  <li>Table Ø 2.60 m · height 1.05 m</li>
+                  <li>Table Ø 2.80 m · height 1.05 m</li>
                   <li>12-sided tapered body clad in brass, copper, patina, titanium-zinc and anthracite aluminium sheets</li>
                   <li>Two side compartments behind flush metal doors</li>
-                  <li>Models ≈ 80 cm longest side each</li>
+                  <li>Models ≈ 1 m longest side each</li>
                   <li>Thin graphite presentation bases, brass plaques</li>
                   <li>Sepsi OSK as a half-section against a fluted backdrop</li>
                   <li>Manual rotation — no motor or drive</li>

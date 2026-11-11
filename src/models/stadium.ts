@@ -18,9 +18,10 @@
  * the three non-photographed elevations and the exact count/spacing of piers.
  */
 import * as THREE from 'three'
+import { MODEL_LENGTH } from './common'
 import { Builder, V, facet, frustum, loft, mat, metricBox, opening, rectRing, wallWithOpenings, extrude } from '../lib/geo'
 
-export const STADIUM_SIZE = { length: 150, depth: 71.5, scale: 0.8 / 150 }
+export const STADIUM_SIZE = { length: 150, depth: 71.5, scale: MODEL_LENGTH / 150 }
 
 const PITCH = { w: 113, d: 76 } // incl. 4 m run-off
 const FRONT_Z = 53 // back face of the main stand (= pitch half-depth 38 + stand depth 15)

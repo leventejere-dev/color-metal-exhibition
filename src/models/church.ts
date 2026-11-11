@@ -18,9 +18,10 @@
  * light-grey metal because the photos do not show it re-clad.
  */
 import * as THREE from 'three'
+import { MODEL_LENGTH } from './common'
 import { Builder, V, extrude, facet, frameShape, lathe, loft, mat, metricBox, opening, rectRing } from '../lib/geo'
 
-export const CHURCH_SIZE = { length: 50.5, scale: 0.8 / 50.5 }
+export const CHURCH_SIZE = { length: 50.5, scale: MODEL_LENGTH / 50.5 }
 
 const PITCH = (60 * Math.PI) / 180
 const T60 = Math.tan(PITCH)

@@ -129,30 +129,6 @@ export function ModelSlot({ slot, index, build, scale, mats }: Props) {
     useStore.getState().select(slot.id as ModelId)
   }
 
-  // backdrop lettering (engraved, low-contrast silver)
-  const backdropText = useMemo(() => new THREE.MeshStandardMaterial({ color: '#ffffff', transparent: true, metalness: 0.2, roughness: 0.5, depthWrite: false }), [])
-  useEffect(() => {
-    const bdrop = slot.backdrop
-    if (!bdrop) return
-    let alive = true
-    labelTexture(
-      [
-        { text: bdrop.title, size: 120, weight: 300, color: '#4a4c4f', spacing: 0.62 },
-        { text: bdrop.subtitle, size: 40, weight: 600, color: '#9c7c36', spacing: 0.5 },
-      ],
-      2400,
-      360,
-    ).then((t) => {
-      if (!alive) return t.dispose()
-      backdropText.map = t
-      backdropText.needsUpdate = true
-    })
-    return () => {
-      alive = false
-      backdropText.map?.dispose()
-    }
-  }, [slot.backdrop, backdropText])
-
   const inset = 0.006
   const bdrop = slot.backdrop
   return (
@@ -197,30 +173,17 @@ export function ModelSlot({ slot, index, build, scale, mats }: Props) {
         </group>
         {/* plaque on the front edge (angled) */}
         <mesh position={[0, BASE_H / 2, bd / 2 + 0.0008]} material={plaqueMat}>
-          <planeGeometry args={[0.16, 0.024]} />
+          <planeGeometry args={[0.19, 0.0285]} />
         </mesh>
         <primitive object={model} position={[0, BASE_H + 0.4 * scale + 0.0005, slot.offsetZ ?? 0]} />
         {bdrop && (
           <group position={[0, BASE_H, -bd / 2 + 0.007]}>
-            {/* fluted graphite backdrop panel with brass capping */}
+            {/* plain fluted backdrop panel with brass capping */}
             <mesh material={backdropMat} position={[0, bdrop.h / 2, 0]} castShadow receiveShadow>
               <boxGeometry args={[bw, bdrop.h, 0.014]} />
             </mesh>
             <mesh material={brassMat} position={[0, bdrop.h + 0.002, 0]} castShadow>
               <boxGeometry args={[bw + 0.002, 0.004, 0.018]} />
-            </mesh>
-            {/* fine brass frame line and engraved title above the stadium roofline */}
-            <mesh material={brassMat} position={[0, bdrop.h - 0.012, 0.0074]}>
-              <boxGeometry args={[bw - 0.03, 0.0012, 0.0008]} />
-            </mesh>
-            <mesh material={brassMat} position={[-(bw - 0.03) / 2, bdrop.h / 2 + 0.01, 0.0074]}>
-              <boxGeometry args={[0.0012, bdrop.h - 0.04, 0.0008]} />
-            </mesh>
-            <mesh material={brassMat} position={[(bw - 0.03) / 2, bdrop.h / 2 + 0.01, 0.0074]}>
-              <boxGeometry args={[0.0012, bdrop.h - 0.04, 0.0008]} />
-            </mesh>
-            <mesh material={backdropText} position={[0, bdrop.h - 0.046, 0.0078]}>
-              <planeGeometry args={[0.6, 0.09]} />
             </mesh>
           </group>
         )}

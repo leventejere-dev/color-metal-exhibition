@@ -214,7 +214,7 @@ export function Table({ children }: { children: ReactNode }) {
   const tilt = Math.atan(((rTop - rBottom) * cosH) / (y1 - y0))
   const logoY = y0 + (y1 - y0) * 0.74
   const apo = (rBottom + ((logoY - y0) / (y1 - y0)) * (rTop - rBottom)) * cosH
-  const logoW = 0.48
+  const logoW = 0.52
   const logoH = logo ? logoW / logo.aspect : 0.08
 
   return (
@@ -235,7 +235,7 @@ export function Table({ children }: { children: ReactNode }) {
         <cylinderGeometry args={[TABLE.bodyRadius - 0.06, TABLE.bodyRadius - 0.06, TABLE.topY0 - TABLE.bodyTop + 0.004, 96]} />
       </mesh>
       {/* fixed index mark (front) — reads against the bezel ticks */}
-      <mesh position={[0, TABLE.bodyTop + 0.004, TABLE.bodyRadius + 0.016]} material={mats.hub}>
+      <mesh position={[0, TABLE.bodyTop + 0.004, rTop * cosH + 0.024]} material={mats.hub}>
         <boxGeometry args={[0.008, 0.008, 0.02]} />
       </mesh>
 

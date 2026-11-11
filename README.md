@@ -22,9 +22,9 @@ Interactive real-time 3D concept of a manually rotated exhibition table carrying
 
 ## The installation (visualisation parameters)
 
-- Rotating top Ø 2.60 m, overall height 1.05 m, brass bezel with 5° engraved ticks and a fixed index mark.
+- Rotating top Ø 2.80 m, overall height 1.05 m, brass bezel with 5° engraved ticks and a fixed index mark.
 - Fixed body: 12-sided, slightly tapered (wider at the top), clad in brushed brass (front hero panel with the official logo, black-on-gold variant per brand book), copper, patinated copper, titanium-zinc and anthracite aluminium sheets, separated by brass strips with soft LED reveals. Two side panels are **compartment doors** with vertical brass pulls and LED sills.
-- Models ≈ 80 cm on their longest side, each on a thin brushed-aluminium presentation base with an engraved brass plaque. The Sepsi OSK model is a **half-section** (cut along the pitch centre line) set against a fluted backdrop panel.
+- Models ≈ 1 m on their longest side, each on a thin brushed-aluminium presentation base with an engraved brass plaque. The Sepsi OSK model is a **half-section** (cut along the pitch centre line) set against a plain fluted backdrop panel.
 
 All tunable values live in [`src/scene/layout.ts`](src/scene/layout.ts).
 
@@ -77,7 +77,7 @@ Either way the site is served at `https://<user>.github.io/<repo>/`.
 
 ```
 src/
-  models/      stadium.ts · church.ts · manor.ts — procedural building geometry (real metres, scaled to ~80 cm)
+  models/      stadium.ts · church.ts · manor.ts — procedural building geometry (real metres, scaled to ~1 m)
   lib/         geo.ts (geometry toolkit) · materials.ts (PBR metals) · textures.ts (procedural textures)
   scene/       Table · ModelSlot (base, lift, selection) · Studio (lighting) · CameraRig · TableRotator · layout
   ui/          Overlay — brand header, model index, info card, control dock, rotation dial, about panel

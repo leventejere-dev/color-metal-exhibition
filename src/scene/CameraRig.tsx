@@ -9,9 +9,9 @@ const { ACTION } = CameraControlsImpl
 const DEG = Math.PI / 180
 
 const FOCUS: Record<string, { dist: number; elev: number; az: number }> = {
-  stadium: { dist: 1.72, elev: 22, az: 12 },
-  church: { dist: 2.05, elev: 11, az: 28 },
-  manor: { dist: 1.8, elev: 22, az: 18 },
+  stadium: { dist: 2.1, elev: 22, az: 12 },
+  church: { dist: 2.55, elev: 11, az: 28 },
+  manor: { dist: 2.2, elev: 22, az: 18 },
 }
 
 /** Camera position/target for a preset: [px, py, pz, tx, ty, tz]. */
@@ -19,16 +19,16 @@ export function presetLookAt(preset: ViewPreset, aspect: number): number[] {
   const fit = Math.max(1, 1.55 / aspect)
   switch (preset) {
     case 'overview': {
-      const t = new THREE.Vector3(0, 0.93, 0)
-      const d = 5.6 * fit
+      const t = new THREE.Vector3(0, 1.0, 0)
+      const d = 6.1 * fit
       const az = 25 * DEG
       const pol = 62 * DEG
       return [t.x + d * Math.sin(pol) * Math.sin(az), t.y + d * Math.cos(pol), t.z + d * Math.sin(pol) * Math.cos(az), t.x, t.y, t.z]
     }
     case 'top':
-      return [0, TABLE.height + 5.7 * fit, 0.02, 0, TABLE.height, 0]
+      return [0, TABLE.height + 6.2 * fit, 0.02, 0, TABLE.height, 0]
     case 'front':
-      return [0, 1.4, 5.5 * fit, 0, 0.98, 0]
+      return [0, 1.45, 6.0 * fit, 0, 1.02, 0]
     default: {
       const slot = SLOTS.find((s) => s.id === preset)!
       const st = useStore.getState()

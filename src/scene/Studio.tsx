@@ -6,7 +6,7 @@ import { blobTexture } from '../lib/textures'
 import { TABLE } from './layout'
 
 /** Bright, warm-white seamless studio (cyclorama). */
-export const BG = '#f3f2ef'
+export const BG = '#dedbd5'
 
 /**
  * White showroom: a seamless cyclorama (the floor only receives shadows, so it
@@ -37,10 +37,10 @@ export function Studio({ quality }: { quality: 'high' | 'low' }) {
       l.shadow.map = null
     }
     const cam = l.shadow.camera as THREE.OrthographicCamera
-    cam.left = -2.8
-    cam.right = 2.8
-    cam.top = 2.8
-    cam.bottom = -2.8
+    cam.left = -3.0
+    cam.right = 3.0
+    cam.top = 3.0
+    cam.bottom = -3.0
     cam.near = 2
     cam.far = 16
     cam.updateProjectionMatrix()
@@ -88,11 +88,11 @@ export function Studio({ quality }: { quality: 'high' | 'low' }) {
       {/* seamless floor: receives shadows only */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[60, 60]} />
-        <shadowMaterial color="#5a5249" opacity={0.26} />
+        <shadowMaterial color="#4f483f" opacity={0.3} />
       </mesh>
       {/* ambient-occlusion style contact shadow under the table */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.002, 0]} renderOrder={1}>
-        <planeGeometry args={[3.0, 3.0]} />
+        <planeGeometry args={[3.3, 3.3]} />
         <meshBasicMaterial map={blob} transparent opacity={0.3} depthWrite={false} />
       </mesh>
     </>

@@ -19,9 +19,10 @@
  * column count, roof pitches.
  */
 import * as THREE from 'three'
+import { MODEL_LENGTH } from './common'
 import { Builder, V, extrude, facet, frameShape, frustum, hipRoof, lathe, mat, metricBox, opening, truncatedHip, type OpeningType } from '../lib/geo'
 
-export const MANOR_SIZE = { length: 50, scale: 0.8 / 50 }
+export const MANOR_SIZE = { length: 50, scale: MODEL_LENGTH / 50 }
 
 const PAV = { cx: 19.25, hw: 5, hd: 11.5 }
 const CON = { x0: 7, x1: 14.25, hd: 10 }
