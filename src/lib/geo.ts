@@ -2,7 +2,7 @@
  * Procedural geometry toolkit used to construct the three architectural models.
  *
  * All building geometry is authored in real-world metres (1 unit = 1 m of the
- * real building) and later scaled down to the ~80 cm model size. UVs are
+ * real building) and later scaled down to the ~1 m model size. UVs are
  * generated in metres as well, so tiling metal-panel textures line up with the
  * standing seams regardless of the model scale.
  *
