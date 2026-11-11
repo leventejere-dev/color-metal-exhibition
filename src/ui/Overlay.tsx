@@ -3,12 +3,15 @@ import { MODELS, modelById, tableState, useStore, type ModelId, type ViewPreset 
 import { CHURCH_SIZE } from '../models/church'
 import { MANOR_SIZE } from '../models/manor'
 import { STADIUM_SIZE } from '../models/stadium'
+import { GARAGE_SIZE } from '../models/garage'
+import { MODEL_LENGTH } from '../models/common'
 
 const LOGO = `${import.meta.env.BASE_URL}color-metal-logo.svg`
 const SCALES: Record<ModelId, number> = {
   stadium: 1 / STADIUM_SIZE.scale,
   church: 1 / CHURCH_SIZE.scale,
   manor: 1 / MANOR_SIZE.scale,
+  garage: 1 / GARAGE_SIZE.scale,
 }
 const isTouch = typeof window !== 'undefined' && window.matchMedia?.('(pointer: coarse)').matches
 
@@ -90,7 +93,7 @@ function InfoCard() {
         <dd>{m.application}</dd>
         <dt>Model</dt>
         <dd>
-          ≈ 1 m longest side · indicative scale ≈ 1:{Math.round(SCALES[m.id] / 5) * 5}
+          ≈ {MODEL_LENGTH.toFixed(2)} m longest side · indicative scale ≈ 1:{Math.round(SCALES[m.id] / 5) * 5}
         </dd>
       </dl>
       {m.id === 'stadium' && (
@@ -134,6 +137,7 @@ const VIEWS: { id: ViewPreset; label: string }[] = [
   { id: 'stadium', label: 'Stadium focus' },
   { id: 'church', label: 'Church focus' },
   { id: 'manor', label: 'Historic building focus' },
+  { id: 'garage', label: 'Parking garage focus' },
 ]
 
 function ViewsMenu() {
@@ -294,10 +298,10 @@ function About() {
               ×
             </button>
             <div className="kicker">Concept visualisation</div>
-            <h2>Three projects. Three metals. One installation.</h2>
+            <h2>Four projects. Four metal applications. One installation.</h2>
             <p>
-              A freestanding cylindrical exhibition table carrying three individually removable architectural scale models — titanium-zinc, anthracite
-              aluminium and copper. The upper display assembly is turned by hand; the lower body stays fixed.
+              A freestanding cylindrical exhibition table carrying four individually removable architectural scale models — titanium-zinc, anthracite
+              aluminium, copper and gold-painted expanded aluminium. The upper display assembly is turned by hand; the lower body stays fixed.
             </p>
             <div className="about-grid">
               <div>
@@ -306,9 +310,10 @@ function About() {
                   <li>Table Ø 2.80 m · height 1.05 m</li>
                   <li>12-sided tapered body clad in brass, copper, patina, titanium-zinc and anthracite aluminium sheets</li>
                   <li>Two side compartments behind flush metal doors</li>
-                  <li>Models ≈ 1 m longest side each</li>
+                  <li>Models ≈ {MODEL_LENGTH.toFixed(2)} m longest side each, ~12 cm apart</li>
                   <li>Thin graphite presentation bases, brass plaques</li>
-                  <li>Sepsi OSK as a half-section against a fluted backdrop</li>
+                  <li>Sepsi OSK as a half-section against a backdrop printed with its surroundings</li>
+                  <li>Four bases in a cross arrangement around the axis</li>
                   <li>Manual rotation — no motor or drive</li>
                 </ul>
               </div>
@@ -319,6 +324,11 @@ function About() {
                   <li>Stadium: shown as a half-section cut along the pitch centre line; stand depths, roof heights and seat colour are estimates.</li>
                   <li>Church: north elevation, buttress count, tracery and helm profile simplified; tower helm shown in PREFA anthracite.</li>
                   <li>Răscruci: side elevations, ornament and column count simplified.</li>
+                  <li>
+                    Satu Mare: footprint, height and corner radius estimated from the drone and street photos; opening pattern and roof plant simplified;
+                    mesh diamond drawn ~2× real size for legibility.
+                  </li>
+                  <li>Stadium backdrop: painted landscape after the aerial photo of the surroundings.</li>
                 </ul>
               </div>
             </div>

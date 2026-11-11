@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-export type ModelId = 'stadium' | 'church' | 'manor'
+export type ModelId = 'stadium' | 'church' | 'manor' | 'garage'
 export type Mode = 'orbit' | 'rotate'
 export type ViewPreset = 'overview' | 'top' | 'front' | ModelId
 
@@ -54,7 +54,21 @@ export const MODELS: ModelInfo[] = [
     swatch: 'linear-gradient(135deg,#c07d58,#8a4f39 55%,#b06e4d)',
     note: 'Warm brown-red copper as photographed — no green patina.',
   },
+  {
+    id: 'garage',
+    index: '04',
+    name: 'Satu Mare Parking Garage',
+    nameRo: 'Parcare etajată, Satu Mare',
+    location: 'Satu Mare, Romania',
+    material: 'Painted expanded aluminium',
+    materialRo: 'Aluminiu expandat vopsit',
+    application: 'Façade screen — gold-painted expanded aluminium mesh with all fixing elements, supplied by COLOR METAL.',
+    swatch: 'linear-gradient(135deg,#e3b553,#b8862c 55%,#d9a742)',
+    note: 'The mesh hangs on vertical profiles in an alternating narrow / wide rhythm in front of the concrete frame; brick plinth with perforated screens; plant area on the roof behind a gold mesh screen.',
+  },
 ]
+
+const NONE_LIFTED: Record<ModelId, boolean> = { stadium: false, church: false, manor: false, garage: false }
 
 export const modelById = (id: ModelId) => MODELS.find((m) => m.id === id)!
 
@@ -88,7 +102,7 @@ export const useStore = create<State>((set) => ({
   mode: 'orbit',
   selected: null,
   hovered: null,
-  lifted: { stadium: false, church: false, manor: false },
+  lifted: { ...NONE_LIFTED },
   exploded: false,
   zincFinish: 'asBuilt',
   view: { preset: 'overview', nonce: 0 },
@@ -99,8 +113,8 @@ export const useStore = create<State>((set) => ({
   select: (selected) => set({ selected }),
   hover: (hovered) => set({ hovered }),
   toggleLift: (id) => set((s) => ({ lifted: { ...s.lifted, [id]: !s.lifted[id] } })),
-  restoreAll: () => set({ lifted: { stadium: false, church: false, manor: false }, exploded: false }),
-  setExploded: (exploded) => set(exploded ? { exploded } : { exploded, lifted: { stadium: false, church: false, manor: false } }),
+  restoreAll: () => set({ lifted: { ...NONE_LIFTED }, exploded: false }),
+  setExploded: (exploded) => set(exploded ? { exploded } : { exploded, lifted: { ...NONE_LIFTED } }),
   setZincFinish: (zincFinish) => set({ zincFinish }),
   goTo: (preset) => set((s) => ({ view: { preset, nonce: s.view.nonce + 1 } })),
   rotateBy: (delta) => set((s) => ({ rotateRequest: { delta, nonce: s.rotateRequest.nonce + 1 } })),

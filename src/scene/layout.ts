@@ -1,4 +1,8 @@
 import type { ModelId } from '../store'
+import { MODEL_LENGTH } from '../models/common'
+
+/** Base footprints, backdrop and focus heights are authored for 1 m models and scale with them. */
+const M = MODEL_LENGTH
 
 /**
  * Conceptual visualisation parameters (metres). Not approved construction
@@ -31,19 +35,26 @@ export interface SlotDef {
   backdrop?: { h: number }
 }
 
-/** Triangular composition: each model faces outward with its main elevation. */
+/**
+ * Four models in a cross-shaped composition, each facing outward with its main
+ * elevation. The two shallow bases (stadium, church) sit on one axis just
+ * outside the ends of the two deep bases (garage, manor) on the other, so all
+ * four fit on the Ø 2.80 m top with ~12 cm between neighbouring bases and
+ * their outer edges ~1.12 m from the axis.
+ */
 export const SLOTS: SlotDef[] = [
   {
     id: 'stadium',
-    angleDeg: 25,
+    angleDeg: 65,
     radius: 0.87,
-    base: [1.07, 0.55],
-    centerY: 0.09,
-    offsetZ: -0.0235,
-    backdrop: { h: 0.29 },
+    base: [1.07 * M, 0.55 * M],
+    centerY: 0.09 * M,
+    offsetZ: -0.0235 * M,
+    backdrop: { h: 0.29 * M },
   },
-  { id: 'church', angleDeg: 145, radius: 0.92, base: [1.09, 0.49], centerY: 0.41 },
-  { id: 'manor', angleDeg: -95, radius: 0.8, base: [1.08, 0.83], centerY: 0.15 },
+  { id: 'church', angleDeg: -115, radius: 0.88, base: [1.09 * M, 0.49 * M], centerY: 0.41 * M },
+  { id: 'manor', angleDeg: 155, radius: 0.74, base: [1.08 * M, 0.83 * M], centerY: 0.15 * M },
+  { id: 'garage', angleDeg: -25, radius: 0.78, base: [1.08 * M, 0.74 * M], centerY: 0.13 * M },
 ]
 
 export const BASE_H = 0.035

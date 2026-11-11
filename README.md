@@ -1,12 +1,13 @@
 # COLOR METAL — Architectural Exhibition Concept
 
-Interactive real-time 3D concept of a manually rotated exhibition table carrying three individually removable architectural scale models, each showcasing one COLOR METAL architectural metal:
+Interactive real-time 3D concept of a manually rotated exhibition table carrying four individually removable architectural scale models, each showcasing one COLOR METAL architectural metal application:
 
 | # | Project | Location | Metal | Application |
 |---|---------|----------|-------|-------------|
 | 01 | Sepsi OSK Stadium (half-section) | Sfântu Gheorghe | Titanium-zinc (gold-tone, as photographed) | Cladding / roofing |
 | 02 | Tășnad Church | Tășnad | Anthracite aluminium (tower helm: PREFA anthracite) | Standing-seam roofing |
 | 03 | Răscruci Historic Building | Răscruci | Copper | Copper roofing |
+| 04 | Satu Mare Parking Garage | Satu Mare | Gold-painted expanded aluminium | Façade mesh screen with all fixing elements |
 
 > Conceptual visualisation — **not** manufacturing documentation. All dimensions are adjustable visualisation parameters.
 
@@ -17,14 +18,14 @@ Interactive real-time 3D concept of a manually rotated exhibition table carrying
 - **Select model** — click a model or use the index; an information card opens.
 - **Lift / Restore model** — the chosen model and its presentation base rise vertically, revealing its docking outline; each model is independent. **Restore all** returns everything.
 - **Exploded view** — all three models lift gently in sequence.
-- **Camera views** — overall perspective, top, front, stadium, church, historic-building focus. **Reset view** returns to the overall perspective.
+- **Camera views** — overall perspective, top, front, stadium, church, historic-building and parking-garage focus. **Reset view** returns to the overall perspective.
 - Stadium card: switch the zinc between the photographed gold-tone finish and natural grey.
 
 ## The installation (visualisation parameters)
 
 - Rotating top Ø 2.80 m, overall height 1.05 m, brass bezel with 5° engraved ticks and a fixed index mark.
 - Fixed body: 12-sided, slightly tapered (wider at the top), clad in brushed brass (front hero panel with the official logo, black-on-gold variant per brand book), copper, patinated copper, titanium-zinc and anthracite aluminium sheets, separated by brass strips with soft LED reveals. Two side panels are **compartment doors** with vertical brass pulls and LED sills.
-- Models ≈ 1 m on their longest side, each on a thin brushed-aluminium presentation base with an engraved brass plaque. The Sepsi OSK model is a **half-section** (cut along the pitch centre line) set against a plain fluted backdrop panel.
+- Models ≈ 0.92 m on their longest side, each on a thin brushed-aluminium presentation base with an engraved brass plaque, arranged in a cross around the axis with ~12 cm between bases. The Sepsi OSK model is a **half-section** (cut along the pitch centre line) set against a backdrop panel printed with a landscape of its surroundings (farmland, tree belts, villages), painted after the aerial photo.
 
 All tunable values live in [`src/scene/layout.ts`](src/scene/layout.ts).
 
@@ -35,6 +36,8 @@ All three buildings are modelled procedurally from the supplied reference photog
 - **Sepsi OSK Stadium** — overall dimensions, stand depths, roof heights and seat colour are estimates; only the half with the main stand and the zinc-clad pavilion (corner spire, "wave" arch, three stepped gables, spire with pinnacles, truncated tower) is modelled. Pier count and spacing approximate. The zinc is shown in the gold tone visible in the photographs.
 - **Tășnad Church** — lengths, heights and roof pitch estimated; north elevation, buttress count and window tracery simplified; baroque helm profile approximated; the tower helm is clad in PREFA anthracite aluminium like the roof; buttress caps shown in grey metal.
 - **Răscruci Historic Building** — proportions taken from elevation and plan photographs; side elevations, ornament, column count and roof pitches simplified.
+- **Satu Mare Parking Garage** — footprint (~50 × 33 m), height (~14 m) and the radius of the rounded street corner estimated from the drone and street photographs; opening pattern, roof plant and ground-floor openings simplified. The expanded-metal diamond is drawn ~2× real size so it stays legible at model scale; the profiles follow the alternating narrow / wide rhythm seen on site.
+- **Stadium backdrop** — a painted landscape after the aerial photograph, not the photograph itself.
 
 ## Tech stack
 
@@ -77,8 +80,8 @@ Either way the site is served at `https://<user>.github.io/<repo>/`.
 
 ```
 src/
-  models/      stadium.ts · church.ts · manor.ts — procedural building geometry (real metres, scaled to ~1 m)
-  lib/         geo.ts (geometry toolkit) · materials.ts (PBR metals) · textures.ts (procedural textures)
+  models/      stadium.ts · church.ts · manor.ts · garage.ts — procedural building geometry (real metres, scaled to ~0.92 m)
+  lib/         geo.ts (geometry toolkit) · materials.ts (PBR metals) · textures.ts, siteTextures.ts (procedural textures)
   scene/       Table · ModelSlot (base, lift, selection) · Studio (lighting) · CameraRig · TableRotator · layout
   ui/          Overlay — brand header, model index, info card, control dock, rotation dial, about panel
 ```

@@ -12,6 +12,7 @@ const FOCUS: Record<string, { dist: number; elev: number; az: number }> = {
   stadium: { dist: 2.1, elev: 22, az: 12 },
   church: { dist: 2.55, elev: 11, az: 28 },
   manor: { dist: 2.2, elev: 22, az: 18 },
+  garage: { dist: 2.05, elev: 20, az: 30 },
 }
 
 /** Camera position/target for a preset: [px, py, pz, tx, ty, tz]. */

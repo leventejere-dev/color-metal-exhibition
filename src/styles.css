@@ -713,8 +713,8 @@ button:focus-visible {
   }
   .index-item {
     border-top: 0;
-    padding: 7px 6px;
-    gap: 6px;
+    padding: 7px 5px;
+    gap: 5px;
   }
   .index-name {
     font-size: 10.5px;
@@ -726,7 +726,9 @@ button:focus-visible {
     min-width: 0;
   }
   .index-mat {
-    font-size: 9px;
+    /* four models side by side: keep the metal swatch, drop the label */
+    font-size: 0;
+    gap: 0;
   }
   .index-mat .badge {
     display: none;

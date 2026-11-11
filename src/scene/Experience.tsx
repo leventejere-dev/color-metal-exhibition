@@ -4,6 +4,7 @@ import { createMaterials } from '../lib/materials'
 import { buildStadium, STADIUM_SIZE } from '../models/stadium'
 import { buildChurch, CHURCH_SIZE } from '../models/church'
 import { buildManor, MANOR_SIZE } from '../models/manor'
+import { buildGarage, GARAGE_SIZE } from '../models/garage'
 import { tableState, useStore } from '../store'
 import { CameraRig } from './CameraRig'
 import { SLOTS } from './layout'
@@ -16,6 +17,7 @@ const BUILD = {
   stadium: { build: buildStadium, scale: STADIUM_SIZE.scale },
   church: { build: buildChurch, scale: CHURCH_SIZE.scale },
   manor: { build: buildManor, scale: MANOR_SIZE.scale },
+  garage: { build: buildGarage, scale: GARAGE_SIZE.scale },
 }
 
 function ReadySignal() {

@@ -5,6 +5,7 @@ import * as THREE from 'three'
 import type { Builder } from '../lib/geo'
 import type { Mats } from '../lib/materials'
 import { flutingNormal, labelTexture } from '../lib/textures'
+import { landscapeTexture } from '../lib/siteTextures'
 import { modelById, useStore, type ModelId } from '../store'
 import { BASE_H, EXPLODE_HEIGHT, LIFT_HEIGHT, TABLE, type SlotDef } from './layout'
 
@@ -24,6 +25,8 @@ const backdropMat = (() => {
   return new THREE.MeshStandardMaterial({ color: '#dcd9d4', roughness: 0.5, metalness: 0.1, normalMap: n, normalScale: new THREE.Vector2(0.45, 0.45) })
 })()
 const brassMat = new THREE.MeshStandardMaterial({ color: '#c0a062', metalness: 1, roughness: 0.28 })
+/** Matte print of the real surroundings (farmland, villages, horizon) on the backdrop's front face. */
+const printMat = new THREE.MeshStandardMaterial({ map: landscapeTexture(), roughness: 0.78, metalness: 0 })
 const shadowTex = (() => {
   const c = document.createElement('canvas')
   c.width = c.height = 128
@@ -178,9 +181,12 @@ export function ModelSlot({ slot, index, build, scale, mats }: Props) {
         <primitive object={model} position={[0, BASE_H + 0.4 * scale + 0.0005, slot.offsetZ ?? 0]} />
         {bdrop && (
           <group position={[0, BASE_H, -bd / 2 + 0.007]}>
-            {/* plain fluted backdrop panel with brass capping */}
+            {/* backdrop panel with a landscape print of the surroundings and brass capping */}
             <mesh material={backdropMat} position={[0, bdrop.h / 2, 0]} castShadow receiveShadow>
               <boxGeometry args={[bw, bdrop.h, 0.014]} />
+            </mesh>
+            <mesh material={printMat} position={[0, bdrop.h / 2, 0.0072]} receiveShadow>
+              <planeGeometry args={[bw - 0.006, bdrop.h - 0.004]} />
             </mesh>
             <mesh material={brassMat} position={[0, bdrop.h + 0.002, 0]} castShadow>
               <boxGeometry args={[bw + 0.002, 0.004, 0.018]} />

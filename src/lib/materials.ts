@@ -10,6 +10,10 @@
  */
 import * as THREE from 'three'
 import { brushedTexture, glazingTexture, linesTexture, noiseTexture, panelTexture, pitchTexture, seatsTexture } from './textures'
+import { brickTexture, expandedMeshTexture, formworkTexture, shutterTexture } from './siteTextures'
+
+/** Expanded-metal diamond (long way × short way, metres). Enlarged ~2× for legibility at model scale. */
+export const MESH_DIAMOND = { lwd: 0.26, swd: 0.12 }
 
 export type Mats = Record<string, THREE.Material>
 
@@ -128,6 +132,40 @@ export function createMaterials(): MaterialSet {
     skylight: std({ color: '#3d5a75', metalness: 0.5, roughness: 0.1, envMapIntensity: 1.4 }),
     iron: std({ color: '#23252a', metalness: 0.6, roughness: 0.5 }),
   }
+
+  /* ---------------- parking garage (Satu Mare) ---------------- */
+  // gold-painted expanded aluminium mesh: alpha-to-coverage keeps the see-through
+  // diamonds stable without transparency sorting; it casts no shadow (the
+  // structure behind it stays lit, as in the photographs)
+  const meshMap = T(tiled(T(expandedMeshTexture(false)), MESH_DIAMOND.lwd, MESH_DIAMOND.swd))
+  const meshAlpha = T(tiled(T(expandedMeshTexture(true)), MESH_DIAMOND.lwd, MESH_DIAMOND.swd))
+  const expMesh = std({
+    color: '#dcc7a0',
+    map: meshMap,
+    alphaMap: meshAlpha,
+    alphaToCoverage: true,
+    side: THREE.DoubleSide,
+    metalness: 0.5,
+    roughness: 0.36,
+    envMapIntensity: 1.25,
+  })
+  expMesh.userData.noCast = true
+  Object.assign(mats, {
+    expMesh,
+    goldPaint: std({ color: '#c99a3d', metalness: 0.5, roughness: 0.36, envMapIntensity: 1.15 }),
+    brick: std({ map: T(tiled(T(brickTexture(81)), 2.0, 1.2)), roughness: 0.86 }),
+    brickLattice: std({ map: T(tiled(T(brickTexture(82, true)), 2.0, 1.2)), roughness: 0.86 }),
+    concG: std({ color: '#bcb8b0', roughness: 0.92 }),
+    voidG: std({ color: '#3e3b36', roughness: 0.95 }),
+    concRaw: std({ map: T(tiled(T(formworkTexture()), 5, 2.5)), roughness: 0.9 }),
+    membrane: std({ map: T(tiled(T(linesTexture('#c6c7c4', '#b6b7b4', 1)), 1, 2.0)), roughness: 0.72 }),
+    shutter: std({ map: T(tiled(T(shutterTexture()), 1, 1)), roughness: 0.45, metalness: 0.3 }),
+    galv: std({ color: '#c6cacd', metalness: 0.85, roughness: 0.32, envMapIntensity: 1.2 }),
+    glassG: std({ color: '#a9bcc8', metalness: 0.6, roughness: 0.06, envMapIntensity: 1.5 }),
+    asphalt: std({ color: '#5b5d60', roughness: 0.95 }),
+    walkway: std({ color: '#bdbab3', roughness: 0.9 }),
+  })
+  ;(mats.galv as THREE.MeshStandardMaterial).roughnessMap = T(tiled(T(brushedTexture(13, true)), 2, 2))
 
   // helm & secondary metal surfaces get a light brushed roughness break-up
   const brushed = T(brushedTexture(9, false))
