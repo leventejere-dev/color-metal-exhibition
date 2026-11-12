@@ -1,8 +1,7 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { Environment, Lightformer } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import * as THREE from 'three'
-import { blobTexture } from '../lib/textures'
 import { TABLE } from './layout'
 
 /** Bright, warm-white seamless studio (cyclorama). */
@@ -17,8 +16,6 @@ export const BG = '#dedbd5'
 export function Studio({ quality }: { quality: 'high' | 'low' }) {
   const key = useRef<THREE.DirectionalLight>(null!)
   const { scene } = useThree()
-  const blob = useMemo(() => blobTexture(), [])
-  useEffect(() => () => blob.dispose(), [blob])
 
   useEffect(() => {
     scene.background = new THREE.Color(BG)
@@ -37,12 +34,13 @@ export function Studio({ quality }: { quality: 'high' | 'low' }) {
       l.shadow.map = null
     }
     const cam = l.shadow.camera as THREE.OrthographicCamera
-    cam.left = -3.0
-    cam.right = 3.0
-    cam.top = 3.0
-    cam.bottom = -3.0
+    // wide enough for the four modules rolled apart
+    cam.left = -4.6
+    cam.right = 4.6
+    cam.top = 4.6
+    cam.bottom = -4.6
     cam.near = 2
-    cam.far = 16
+    cam.far = 18
     cam.updateProjectionMatrix()
     l.shadow.bias = -0.00012
     l.shadow.normalBias = 0.0012
@@ -89,11 +87,6 @@ export function Studio({ quality }: { quality: 'high' | 'low' }) {
       <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[60, 60]} />
         <shadowMaterial color="#4f483f" opacity={0.3} />
-      </mesh>
-      {/* ambient-occlusion style contact shadow under the table */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.002, 0]} renderOrder={1}>
-        <planeGeometry args={[3.3, 3.3]} />
-        <meshBasicMaterial map={blob} transparent opacity={0.3} depthWrite={false} />
       </mesh>
     </>
   )

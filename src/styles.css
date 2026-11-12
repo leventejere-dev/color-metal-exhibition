@@ -65,6 +65,15 @@ button:focus-visible {
   pointer-events: auto;
 }
 
+/* the interface stays above the 3D labels of the construction view */
+.overlay {
+  z-index: 10;
+}
+
+.lbl-sm {
+  display: none;
+}
+
 .panel {
   background: var(--panel);
   border: 1px solid var(--line);
@@ -655,10 +664,161 @@ button:focus-visible {
   }
 }
 
+/* ---------------- control stack (furniture bar + dock) ---------------- */
+.controls {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  max-width: calc(100vw - 24px);
+  pointer-events: none;
+}
+
+.controls > * {
+  pointer-events: auto;
+}
+
+.controls .dock,
+.controls .dial {
+  position: static;
+  transform: none;
+  bottom: auto;
+  left: auto;
+}
+
+.controls .dial {
+  animation: rise-in 0.35s ease;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.fbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 7px 7px 14px;
+  max-width: calc(100vw - 24px);
+}
+
+.fbar-label {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-faded);
+  margin-right: 4px;
+}
+
+.spread {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0 4px;
+}
+
+.spread input {
+  width: 130px;
+  accent-color: #a8873f;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.menu button.on {
+  color: #5a4518;
+  background: rgba(192, 160, 98, 0.12);
+}
+
+.menu hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 4px 6px;
+}
+
+/* inspection legend (construction / connection) */
+.legend h2 {
+  font-size: 17px;
+}
+
+.steps {
+  margin: 0 0 4px;
+  padding-left: 18px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: #3f3c38;
+}
+
+.steps li {
+  margin-bottom: 6px;
+}
+
+.about-grid.single {
+  grid-template-columns: 1fr;
+  border-top: 0;
+}
+
+/* 3D labels in the construction view */
+.tag-wrap {
+  pointer-events: none;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: #2b2925;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(192, 160, 98, 0.55);
+  padding: 4px 8px;
+  border-radius: 2px;
+  box-shadow: 0 4px 14px rgba(60, 50, 35, 0.1);
+}
+
+.tag i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #a8873f;
+  flex: none;
+}
+
 /* ---------------- responsive ---------------- */
-@media (max-width: 1320px) {
+@media (max-width: 1500px) {
   .hints {
-    bottom: 92px;
+    bottom: 132px;
+  }
+}
+
+@media (max-width: 1240px) {
+  .fbar-label {
+    display: none;
+  }
+  .fbar .btn,
+  .dock .btn {
+    padding: 0 10px;
+    letter-spacing: 0.12em;
+  }
+  .seg button {
+    padding: 0 10px;
+    letter-spacing: 0.12em;
   }
 }
 
@@ -737,7 +897,7 @@ button:focus-visible {
     left: 12px;
     right: 12px;
     top: auto;
-    bottom: 132px;
+    bottom: 196px;
     width: auto;
     transform: translateY(16px);
     padding: 16px 16px 14px;
@@ -764,16 +924,45 @@ button:focus-visible {
   .card .note {
     display: none;
   }
-  .dock {
-    bottom: 12px;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: calc(100vw - 24px);
+  .controls {
+    bottom: 10px;
+    width: calc(100vw - 20px);
     gap: 6px;
   }
-  .dock .sep {
+  .dock,
+  .fbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 5px;
+    padding: 6px;
+  }
+  .dock .sep,
+  .fbar .sep {
     display: none;
   }
+  .spread input {
+    width: 110px;
+  }
+  .lbl-lg {
+    display: none;
+  }
+  .lbl-sm {
+    display: inline;
+  }
+  .fbar .seg {
+    width: 100%;
+  }
+  .fbar .seg button {
+    flex: 1;
+  }
+  .card.legend {
+    max-height: 34vh;
+  }
+  .card.legend .steps {
+    font-size: 10.5px;
+  }
+  .fbar .btn,
   .dock .btn {
     height: 30px;
     padding: 0 10px;
@@ -786,8 +975,8 @@ button:focus-visible {
     font-size: 9.5px;
     letter-spacing: 0.12em;
   }
-  .dial {
-    bottom: 104px;
+  .controls .dial {
+    padding: 8px 10px;
   }
   .hints {
     display: none;

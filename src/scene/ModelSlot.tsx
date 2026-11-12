@@ -75,7 +75,7 @@ export function ModelSlot({ slot, index, build, scale, mats }: Props) {
     labelTexture(
       [
         { text: info.nameRo.toUpperCase(), size: 74, weight: 600, color: '#2a2418', spacing: 0.16 },
-        { text: `${info.materialRo.toUpperCase()}  ·  ${info.location.split(',')[0].toUpperCase()}`, size: 50, weight: 500, color: '#3d3524', spacing: 0.2 },
+        { text: `${info.materialRo.toUpperCase()}  ·  ${info.cityRo.toUpperCase()}`, size: 50, weight: 500, color: '#3d3524', spacing: 0.2 },
       ],
       1600,
       240,
@@ -114,8 +114,8 @@ export function ModelSlot({ slot, index, build, scale, mats }: Props) {
     inlay.emissiveIntensity = THREE.MathUtils.damp(inlay.emissiveIntensity, glowTarget, 6, dt)
   })
 
-  const a = (slot.angleDeg * Math.PI) / 180
-  const pos: [number, number, number] = [Math.sin(a) * slot.radius, TABLE.height, Math.cos(a) * slot.radius]
+  // module frame: the model sits on its module's bisector, facing outward
+  const pos: [number, number, number] = [0, TABLE.height, slot.radius]
 
   const onOver = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation()
@@ -135,7 +135,7 @@ export function ModelSlot({ slot, index, build, scale, mats }: Props) {
   const inset = 0.006
   const bdrop = slot.backdrop
   return (
-    <group position={pos} rotation={[0, a, 0]}>
+    <group position={pos}>
       {/* dock marking on the tabletop (stays when the model is lifted) */}
       <group position={[0, 0.0007, 0]}>
         <mesh material={dockMat} position={[0, 0, bd / 2 + 0.012]}>

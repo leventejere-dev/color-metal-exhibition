@@ -5,12 +5,12 @@ import { buildStadium, STADIUM_SIZE } from '../models/stadium'
 import { buildChurch, CHURCH_SIZE } from '../models/church'
 import { buildManor, MANOR_SIZE } from '../models/manor'
 import { buildGarage, GARAGE_SIZE } from '../models/garage'
-import { tableState, useStore } from '../store'
+import { moduleState, tableState, useStore } from '../store'
 import { CameraRig } from './CameraRig'
+import { Installation } from './Installation'
 import { SLOTS } from './layout'
 import { ModelSlot } from './ModelSlot'
 import { Studio } from './Studio'
-import { Table } from './Table'
 import { TableRotator } from './TableRotator'
 
 const BUILD = {
@@ -25,7 +25,7 @@ function ReadySignal() {
   const three = useThree()
   useEffect(() => {
     // dev-only handle for inspection tools
-    if (import.meta.env.DEV) Object.assign(window, { __three: three, __store: useStore, __table: tableState })
+    if (import.meta.env.DEV) Object.assign(window, { __three: three, __store: useStore, __table: tableState, __modules: moduleState })
   }, [three])
   useFrame(() => {
     frames.current++
@@ -43,11 +43,12 @@ export function Experience({ quality }: { quality: 'high' | 'low' }) {
   return (
     <>
       <Studio quality={quality} />
-      <Table>
-        {SLOTS.map((slot, i) => (
-          <ModelSlot key={slot.id} slot={slot} index={i} build={BUILD[slot.id].build} scale={BUILD[slot.id].scale} mats={materialSet.mats} />
-        ))}
-      </Table>
+      <Installation
+        renderModel={(id, i) => {
+          const slot = SLOTS.find((s) => s.id === id)!
+          return <ModelSlot slot={slot} index={i} build={BUILD[id].build} scale={BUILD[id].scale} mats={materialSet.mats} />
+        }}
+      />
       <CameraRig />
       <TableRotator />
       <ReadySignal />

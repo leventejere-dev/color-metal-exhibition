@@ -306,3 +306,46 @@ export function landscapeTexture(seed = 17) {
   ctx.fillRect(0, hz - 30, W, 120)
   return finish(c, true, false)
 }
+
+/**
+ * Edge of an aluminium-honeycomb sandwich panel: light top skin, hexagonal
+ * aluminium core, grey bottom skin. u: 1 tile = 40 mm along the edge; v: 0…1 across.
+ */
+export function honeycombTexture() {
+  const W = 128
+  const H = 128
+  const { c, ctx } = canvas(W, H)
+  ctx.fillStyle = '#6e7174'
+  ctx.fillRect(0, 0, W, H)
+  // core: hexagon walls seen edge-on (vertical cell walls with slanted facets)
+  const y0 = 22
+  const y1 = H - 18
+  ctx.fillStyle = '#b9bdc1'
+  ctx.fillRect(0, y0, W, y1 - y0)
+  ctx.strokeStyle = '#7b7f84'
+  ctx.lineWidth = 3
+  for (const x of [0, 32, 64, 96, 128]) {
+    ctx.beginPath()
+    ctx.moveTo(x, y0)
+    ctx.lineTo(x, y1)
+    ctx.stroke()
+  }
+  ctx.strokeStyle = 'rgba(70,74,78,0.5)'
+  ctx.lineWidth = 2
+  for (const x of [16, 48, 80, 112]) {
+    ctx.beginPath()
+    ctx.moveTo(x - 8, y0)
+    ctx.lineTo(x + 8, y1)
+    ctx.stroke()
+  }
+  // skins
+  ctx.fillStyle = '#e4e0d8'
+  ctx.fillRect(0, 0, W, y0 - 4)
+  ctx.fillStyle = '#a7a39b'
+  ctx.fillRect(0, y0 - 4, W, 4)
+  ctx.fillStyle = '#8d9094'
+  ctx.fillRect(0, y1, W, H - y1)
+  const t = finish(c)
+  t.wrapT = THREE.ClampToEdgeWrapping
+  return t
+}
